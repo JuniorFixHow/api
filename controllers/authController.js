@@ -408,7 +408,7 @@ const loginSuccess = (req, res)=>{
             success: true,
             message: "Account authenticated successfully",
             userG: req.user,
-            // cookies: req.cookies
+            cookies: req.cookies
         });
     }
 };
