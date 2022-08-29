@@ -8,6 +8,10 @@ const userRoutes = require( "./routes/userRoutes");
 const cookieSession = require( "cookie-session");
 const dotenv = require( "dotenv");
 const passport = require( "passport");
+const assignmentRoutes = require( "./routes/assignments");
+const solutionRoutes = require( "./routes/solutions");
+const courseRoutes = require( "./routes/courseRoutes");
+const studentRoutes = require( "./routes/studentRoutes");
 
 
 const app = express();
@@ -38,8 +42,12 @@ app.use(cors({
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/api/users", authRoutes)
-app.use("/api/users", userRoutes)
+app.use("/api/users", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/assignments", assignmentRoutes);
+app.use("/api/solutions", solutionRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/students", studentRoutes);
 
 
 app.use((err, req, res, next)=>{
