@@ -1,5 +1,6 @@
 const Assignment = require("../model/Assignment");
 const User = require("../model/User");
+const Solution = require("../model/Solution");
 const createError = require("../utils/error");
 
 const createAssignment = async(req, res, next)=>{
@@ -69,4 +70,19 @@ const getAllAssignments = async(req, res, next)=>{
     }
 }
 
-module.exports = {createAssignment, updateAssignment, deleteAssignment, getAssignment, getAllAssignments}
+const getAssignmentSolutions = async (req, res, next)=>{
+    try{
+        const assignment = await Assignment.findById(req.params.id);
+        const list = await Promise.all(
+            assignment.answers.map((answer)=>{
+                return Solution.findById(answer);
+            })
+        );
+        res.status(200).json(list);
+    }
+    catch(err){
+        next(err);
+    }
+}
+
+module.exports = {createAssignment, updateAssignment, deleteAssignment, getAssignment, getAllAssignments, getAssignmentSolutions}

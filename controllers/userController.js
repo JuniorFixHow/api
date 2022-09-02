@@ -1,4 +1,5 @@
 const User = require("../model/User");
+const Assignment = require("../model/Assignment");
 const createError = require("../utils/error");
 const bcrypt = require("bcrypt");
 
@@ -72,6 +73,21 @@ const deleteUser = async(req, res, next)=>{
     }
 }
 
+//user assignments
+const getUserAssignments = async (req, res, next)=>{
+    try{
+        const user = await User.findById(req.params.id);
+        const list = await Promise.all(
+            user.assignments.map((assignment)=>{
+                return Assignment.findById(assignment);
+            })
+        );
+        res.status(200).json(list);
+    }
+    catch(err){
+        next(err);
+    }
+}
 
 
-module.exports = {updateUser, getAllUsers, getUser, deleteUser};
+module.exports = {updateUser, getAllUsers, getUser, deleteUser, getUserAssignments};
