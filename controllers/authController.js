@@ -399,6 +399,22 @@ const resetPass = (req, res)=>{
 }
 
 
+//logout endpoint: this is not necessary, but in case u need it
+
+const logoutUser = async (req, res)=>{
+    try{
+        const {_id} = req.body;
+        const user = await User.findById(_id);
+        await user.save();
+        const users = await User.find();
+        res.status(200).send();
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).send();
+    }
+}
+
 //Google Authentication
 
 
@@ -448,6 +464,7 @@ module.exports ={
     register,
     requestPasswordReset,
     resetPass,
+    logoutUser,
     gloginAuth,
     glogout,
     gloginCallBack,

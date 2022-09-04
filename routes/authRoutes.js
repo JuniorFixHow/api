@@ -1,5 +1,5 @@
 const express =  require( "express");
-const { login, register, verificationFile, verify, requestPasswordReset, resetPass, gloginFailed, gloginCallBack, gloginAuth, glogout, loginSuccess } = require( "../controllers/authController");
+const { login, register, verificationFile, verify, requestPasswordReset, resetPass, logoutUser, gloginFailed, gloginCallBack, gloginAuth, glogout, loginSuccess } = require( "../controllers/authController");
 
 const router = express.Router();
 
@@ -10,6 +10,7 @@ router.get("/verify/:userId/:uniqueString", verify);
 
 router.post("/requestPasswordReset", requestPasswordReset);
 router.post("/resetPassword", resetPass);
+router.delete("/logout", logoutUser);
 
 //google
 
