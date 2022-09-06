@@ -12,7 +12,7 @@ const CourseSchema = new mongoose.Schema({
         type:String
     },
     resources:{
-        type:String
+        type:[String]
     },
     price:{
         type:Number
